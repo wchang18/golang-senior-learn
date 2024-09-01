@@ -1,0 +1,30 @@
+syntax = "v1"
+
+type CreateOrderReq {
+	PayMethod string  `json:"payMethod,options=alipay|wechat"` //支付方式，alipay, wechat
+	Amount    float32 `json:"amount"` //金额
+	Month     int32   `json:"month"` //月数
+}
+
+type Order {
+	OrderId     int64  `json:"orderId"` //订单id
+	PayUrl      string `json:"payUrl"` //支付链接
+	OrderStatus string `json:"orderStatus"` //订单状态
+	PayMethod   string `json:"payMethod"` //支付方式
+	ExpireAt    string `json:"expireAt"` //过期时间
+}
+
+type Resp {
+	Code int32  `json:"code"`
+	Msg  string `json:"msg"`
+	Data Order  `json:"data"`
+}
+
+@server (
+	prefix: /v1
+)
+service order-api {
+	@handler CreateOrderHandler
+	post /createOrder (CreateOrderReq) returns (Resp)
+}
+

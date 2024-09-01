@@ -1,0 +1,42 @@
+version: '3'
+services:
+  mysql:
+    #restart: always
+    image: mysql:5.7.16
+    container_name: mysql-5.7
+    volumes:
+      #- ./mydir:/mydir
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/conf/my.cnf:/etc/my.cnf
+      #数据库还原目录 可将需要还原的sql文件放在这里
+      # - /docker/mysql/source:/docker-entrypoint-initdb.d
+    environment:
+      - "MYSQL_ROOT_PASSWORD=root001"
+      #- "MYSQL_DATABASE=mydb"
+      - "TZ=Asia/Shanghai"
+    ports:
+      - 3306:3306
+  rabbit:
+    image: rabbitmq:3.8-management
+    hostname: rabbit
+    container_name: "rabbitmq-3.8"
+    #restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=123123
+      - RABBITMQ_DEFAULT_VHOST="/"
+    volumes:
+      - ./rabbitmq/data:/var/lib/rabbitmq
+  redis:
+      #restart: always
+      image: redis:5.0.0
+      container_name: redis-5.0
+      command: redis-server --requirepass 123456
+      ports:
+        - "16379:6379"
+      volumes:
+        - ./redis/data:/data
+

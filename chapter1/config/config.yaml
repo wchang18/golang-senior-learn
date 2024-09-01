@@ -1,0 +1,14 @@
+AppName: "my_app"
+Env: "dev"
+LogPath: "./log/"
+DataPath: "./data"
+Scheduler:
+  - Spec: "*/2 * * * * ?"
+    Commend: "env"
+    Open: false
+  - Spec: "*/1 * * * * ?"
+    Commend: "product start --date=20240702 -c=4"
+    Open: true
+  - Spec: "1 5 22 * * ?"
+    Commend: "clear --delhour=48"
+    Open: false

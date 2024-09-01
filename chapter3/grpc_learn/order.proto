@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package gary.pb;
+
+option go_package = "my/pb";
+
+enum OrderStatus {
+  Pending = 0;
+  Success = 1;
+  Failed = 2;
+}
+
+message Order {
+  int64 orderId = 1;
+  string orderName = 2;
+  float orderPrice = 3;
+  OrderStatus orderStatus = 4;
+  map<string, string> orderTag = 5;
+  optional string orderDesc = 6;
+}
+
+message OrderListRes {
+  repeated Order order = 1;
+  int32 Total = 2;
+}
+
+message GetOrderListReq {
+  int32 page = 1;
+  int32 pageSize = 2;
+}
+
+message Res {
+  string msg = 1;
+  int32 code = 2;
+}
+
+service OrderService {
+  rpc GetOrderList(GetOrderListReq) returns (OrderListRes);
+  rpc CreateOrder(stream Order) returns (Res);
+}

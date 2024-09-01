@@ -1,0 +1,9 @@
+Name: order-api
+Host: 0.0.0.0
+Port: 8010
+PayRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: pay.rpc
+MysqlDb: 'root:root001@tcp(127.0.0.1:3306)/mall?charset=utf8mb4&parseTime=true&loc=Local'
