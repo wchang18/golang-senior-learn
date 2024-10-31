@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/gogf/gf/v2/errors/gerror"
 	"github.com/gogf/gf/v2/net/ghttp"
-	prfilev1 "user-admin/api/profile/v1"
+	profilev1 "user-admin/api/profile/v1"
 	v1 "user-admin/api/user/v1"
 	"user-admin/internal/consts"
 	"user-admin/internal/model"
@@ -55,10 +55,10 @@ func (s *sUser) Register(ctx context.Context, req *v1.RegisterReq) (res *v1.Regi
 	return
 }
 
-func (l *sUser) GetUser(ctx context.Context, req *prfilev1.GetProfileReq) (res *prfilev1.GetProfileRes, err error) {
+func (l *sUser) GetUser(ctx context.Context, req *profilev1.GetProfileReq) (res *profilev1.GetProfileRes, err error) {
 	name := ghttp.RequestFromCtx(ctx).GetCtxVar(consts.UserNameKey)
 	user, err := service.Store().GetUser(name.String())
-	res = &prfilev1.GetProfileRes{
+	res = &profilev1.GetProfileRes{
 		Username:  user.UserName,
 		Telephone: user.Telephone,
 	}

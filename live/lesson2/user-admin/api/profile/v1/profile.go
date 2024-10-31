@@ -7,6 +7,10 @@ type GetProfileReq struct {
 }
 
 type GetProfileRes struct {
+	MyInfo
+}
+
+type MyInfo struct {
 	Username  string `json:"username"`
 	Telephone string `json:"telephone"`
 }
